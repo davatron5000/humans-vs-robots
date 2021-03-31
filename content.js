@@ -1,3 +1,18 @@
+let style = document.createElement("style");
+style.innerHTML = `
+  [data-humans-vs-robots-role]:before {
+    position: absolute;
+    font-size: 11px;
+    top: 12px;  
+    left: 26px;
+  }
+  [data-humans-vs-robots-role="human"] { background: #edf6fd }
+  [data-humans-vs-robots-role="human"]:before { content: "😀" }
+  [data-humans-vs-robots-role="robot"] { background: #fee9e8 }
+  [data-humans-vs-robots-role="robot"]:before { content: "🤖" }
+`;
+document.body.appendChild(style);
+
 document.querySelectorAll('.Box-row .js-navigation-open').forEach( (item) => {
   const filename = item.textContent.toLowerCase();
   const humanFiles = ['AUTHORS', 'CHANGELOG', 'CODE_OF_CONDUCT', 'CONTRIBUTING', 'FAQ', 'LICENSE', 'README', 'TECHNOLOGY', 'TROUBLESHOOTING', 'SECURITY'];
@@ -27,8 +42,8 @@ document.querySelectorAll('.Box-row .js-navigation-open').forEach( (item) => {
     || filename.startsWith('gulpfile')
     || filename.startsWith('.')
   ){
-    row.style.background = '#fee9e8'
+    row.setAttribute("data-humans-vs-robots-role", "robot");
   } else if(humanFiles.includes(item.textContent.split('-')[0].split('.')[0])) {
-    row.style.background = '#edf6fd'
+    row.setAttribute("data-humans-vs-robots-role", "human");
   }
 })
